@@ -12990,27 +12990,54 @@ Naive Predictor: [Accuracy score: 0.2478, F-score: 0.2917]
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<p><strong><span style="color:red">Reviewer (1) SUGGESTION</span>:</strong></p>
+<p><strong>What makes this model a good candidate for the problem, given what you know about the data?</strong></p>
+
+<pre><code>The above question hasn't been sufficiently answered, what is expected here is to include why the models were chosen given  what is known about the problem. Basically what this part is asking is to justify picking the models given this particular problem.  To answer this, simply consider the characteristics of both the data and the models and why they might be appropriate for each other.
+
+</code></pre>
+<p><em>It isn't very clear what this means.</em></p>
+<ul>
+<li>Why:We can find good features among all by controlling the max number of features to fit model.</li>
+</ul>
+<p><em>As mentioned above, the justification should specifically state why the model is suitable for the data, characteristics of both should be considered.</em></p>
+<ul>
+<li>Why: doesn’t require any prior probability like Naïve Bayes. So, it seems efficient to implement.</li>
+</ul>
+<p><em>Was some analysis done to conclude the data is non-linear? If yes, this should be provided.</em></p>
+<ul>
+<li>Why: can model non-linear relationship and based on the given features it needs non-linear model.</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer</strong>:</p>
-<p><code>Ensemble method</code> (<a href="http://www.nickgillian.com/wiki/pmwiki.php/GRT/AdaBoost">http://www.nickgillian.com/wiki/pmwiki.php/GRT/AdaBoost</a>)</p>
+<p><code>Ensemble method(AdaBoost)</code> (<a href="http://www.nickgillian.com/wiki/pmwiki.php/GRT/AdaBoost">http://www.nickgillian.com/wiki/pmwiki.php/GRT/AdaBoost</a>)</p>
 <ul>
 <li>Real-world application:  Computer vision</li>
 <li>Pros: works  well with less tweaking of parameters or settings</li>
 <li>Cons: can be sensitive to noisy data and outliers</li>
-<li>Why: doesn’t require any prior probability like Naïve Bayes. So, it seems efficient to implement.</li>
+<li><span style="color:red">Why</span>: A model we are bulding is a binary classifier ( income above 50k or not) and Adaboost algorithm with desiciontree estimator is known for best used for binary classification.(
+<a href="https://machinelearningmastery.com/boosting-and-adaboost-for-machine-learning/">https://machinelearningmastery.com/boosting-and-adaboost-for-machine-learning/</a>)</li>
 </ul>
 <p><code>Decision Tree</code> (<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2263124/">https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2263124/</a>)</p>
 <ul>
 <li>Real-world application:  Medical diagnosis </li>
 <li>Pros: robust to noise and missing values</li>
 <li>Cons: complex trees are hard to interpret, anc can get overfitting</li>
-<li>Why: seems suitable when there are many features. We can find good features among all by controlling the max number of features to fit model.</li>
+<li><span style="color:red">Why</span>:  DecisionTree algorithm provides clear relaionship of the feature importance. Especially when the number of features is not too learge, it is easy to see a relation between important featrues to outcome. Since our data has only 13 features, Decision Tree would be a good candidate to build a model whose result is easy to understand.(<a href="https://towardsdatascience.com/decision-trees-in-machine-learning-641b9c4e8052">https://towardsdatascience.com/decision-trees-in-machine-learning-641b9c4e8052</a>)</li>
 </ul>
 <p><code>SVM</code> (<a href="http://www.lauradhamilton.com/machine-learning-algorithm-cheat-sheet">http://www.lauradhamilton.com/machine-learning-algorithm-cheat-sheet</a>)</p>
 <ul>
 <li>Real-world application: image classifier</li>
 <li>Pros: Robust to noise (because they maximize margins)</li>
 <li>Cons: can requires significant memory and processing power</li>
-<li>Why: can model non-linear relationship and based on the given features it needs non-linear model.</li>
+<li><span style="color:red">Why</span>: Based on results from explarating the data, some features have very skewed values and this might lead to having outlier points. If a model is prone to outliers, it can overfit. But SVM has a feature to ignore outliers and find the hyper-plane that has maximum margin. Hence,  SVM is robust to outliers. (<a href="https://www.analyticsvidhya.com/blog/2017/09/understaing-support-vector-machine-example-code/">https://www.analyticsvidhya.com/blog/2017/09/understaing-support-vector-machine-example-code/</a>)</li>
 </ul>
 
 </div>
@@ -13074,6 +13101,18 @@ In the code block below, you will need to implement the following:</p>
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><span style="color:red">Reviewer (1) SUGGESTION</span>:
+For the accuracy_score, the order looks to be incorrect. It should be y_true, y_pred. See -</p>
+
+<pre><code>accuracy_score(y_true, y_pred, normalize=True, sample_weight=None)[source]</code></pre>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[17]:</div>
@@ -13123,11 +13162,11 @@ In the code block below, you will need to implement the following:</p>
     <span class="n">results</span><span class="p">[</span><span class="s1">&#39;pred_time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">end</span> <span class="o">-</span> <span class="n">start</span>
             
     <span class="c1"># TODO: Compute accuracy on the first 300 training samples which is y_train[:300]</span>
-    <span class="n">results</span><span class="p">[</span><span class="s1">&#39;acc_train&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">prediction_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">[:</span><span class="mi">300</span><span class="p">])</span>
+    <span class="n">results</span><span class="p">[</span><span class="s1">&#39;acc_train&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">Y_true</span><span class="o">=</span><span class="n">y_train</span><span class="p">[:</span><span class="mi">300</span><span class="p">],</span> <span class="n">y_pred</span><span class="o">=</span><span class="n">prediction_train</span><span class="p">)</span>
     
         
     <span class="c1"># TODO: Compute accuracy on test set using accuracy_score()</span>
-    <span class="n">results</span><span class="p">[</span><span class="s1">&#39;acc_test&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">prediction_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+    <span class="n">results</span><span class="p">[</span><span class="s1">&#39;acc_test&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_true</span><span class="o">=</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="o">=</span><span class="n">prediction_test</span><span class="p">)</span>
     
     <span class="c1"># TODO: Compute F-score on the the first 300 training samples using fbeta_score()</span>
     <span class="n">results</span><span class="p">[</span><span class="s1">&#39;f_train&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fbeta_score</span><span class="p">(</span><span class="n">y_train</span><span class="p">[:</span><span class="mi">300</span><span class="p">],</span> <span class="n">prediction_train</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
@@ -13335,8 +13374,29 @@ Amonng the three models, AdaBoostclassifier is the best.</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer</strong>: 
-The final model is Adaboost algorithm with DecisionTree estimator. In a nutshell, we use individuals' demographic data such as age, gender,and educaion-leve collected from the 1994 U.S. Census to predict its corresponding income level in two catrgories: more than <code>$50,000</code> or less than or eqaul to <code>$50,000</code>.  To predict the income level, we first develop many simple and medioca models ( weak learner) using DecisionTree method and the Adaboost algorithm boosts to convege these models into a great model( strong learner).</p>
+<p><strong><span style="color:red">Reviewer (1) SUGGESTION</span>:</strong></p>
+<p>The things to address to answer this question include -</p>
+<p>Offering a brief explanation of model selected. Be sure to include a brief description of the base model (decision trees), this can be explained using the game twenty questions. Also what is a weak learner? or rather, what makes a model a weak learner? (what condition must it satisfy to be considered one?)</p>
+<ul>
+<li>Explaining how the model goes about the training process</li>
+<li>Briefly explain how the model goes about making predictions</li>
+<li>Finally, making sure to explain all this in a way that would be understandable to a non-technical audience.</li>
+</ul>
+<p><a href="https://en.wikipedia.org/wiki/Twenty_Questions">https://en.wikipedia.org/wiki/Twenty_Questions</a></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Answer</strong>: <br/>
+The chosen model which will accurately predict potential donors (whether an individual makes more than $50,000) is called Adaboost with DecisionTree estimator. 
+<strong>Adaboost</strong> is a family of "boosting" algorithms that are able to convert mediocre accuracy models(weak learners) to an accurate model(strong learner). The main principle of boosting is to fit a sequence of weak learners to weighted versions of the data and combine them to produce a final model.  To produce a sequence of weak learners ( mediocre models), we use DecisionTrees. <strong>Decision Trees</strong> are a learning method used for classifying data by applying simple decision rules inferred from the data features.  This process can be analogous to the "Twenty questions" game.  For example, based on features, the algorithm applies a True/False condition (question) and split the training data into two.(ex: is sex female? Yes/No) Then the next T/F condition based on another feature is applied to further split this training data. Which condition(question) to be used is based on how accurately this split predicts the value of outcome variable ( ex: individuals with income more than 50K =1 or not =0).</p>
+<p>The process begins by fitting a binary ( two class) DecisionTree classifier to the original training data and determine how many data points are misclassified. ( note: we call this classifier as weak classifier or weak learner since this classifier only uses one threshold on one feature to split data and stop the process instead of using multiple features to build more sophisticated decision tree classifier.) Based on the number of correct/missed prediction, weight is calculated and given to misclassified data points. Then the next classifier is applied to this weighted version of the training data so that the next classifier will try to predict them correctly. Weight is calculated based on the result and more weight will be assigned to misclassified points. So these decision tree classifiers are trained in sequence on a weighted version of the training data, and more weights are given to data points that are misclassified by the previous round. This process continues until it reaches a limit of number of models or accuracy. Then the predictions are combined through a weighted majority vote (classification) to produce the final prediction.</p>
+<p><a href="https://blog.statsbot.co/ensemble-learning-d1dcd548e936">https://blog.statsbot.co/ensemble-learning-d1dcd548e936</a></p>
+<p><a href="https://medium.com/machine-learning-101/https-medium-com-savanpatel-chapter-6-adaboost-classifier-b945f330af06">https://medium.com/machine-learning-101/https-medium-com-savanpatel-chapter-6-adaboost-classifier-b945f330af06</a></p>
 
 </div>
 </div>
@@ -13786,7 +13846,7 @@ I think the top 5 most important features are</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer</strong> : The five most relavent fetures are <code>capitalgain</code>, <code>capitalloss</code>,<code>age</code>,<code>education-num</code>, and <code>hours-per-work</code>. I chose <code>age</code> and <code>education-num</code> in my top5 features. I would have picked <code>hours-per-work</code> as one of my top5 features based on my data exploring results, but in the end I set this variable on my 6th level features and  instead I picked <code>martial-status</code> which seemed to be an importeant feature absed on my inital analysis.  <code>capitalgain</code>, <code>capitalloss</code> are two features I didn't check becasue the bar plot with log transfomed values are very skiewed into tow catagories. I didn't think it would be importnad.</p>
+<p><strong>Answer</strong> : The five most relavent fetures are <code>capitalgain</code>, <code>capitalloss</code>,<code>age</code>,<code>education-num</code>, and <code>hours-per-work</code>. I chose <code>age</code> and <code>education-num</code> in my top5 features. I would have picked <code>hours-per-work</code> as one of my top5 features based on my data exploring results, but in the end I set this variable on my 6th level features and  instead I picked <code>martial-status</code> which seemed to be an importeant feature absed on my inital analysis.  <code>capitalgain</code>, <code>capitalloss</code> are two features I didn't check becasue the bar plot with log transfomed values are very skiewed into two catagories. I didn't think it would be importnad.</p>
 
 </div>
 </div>
@@ -13874,7 +13934,7 @@ F-score on testing data: 0.7023
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer</strong> : Accuary and F-score become slightly lower with a model with 5 features then a model with all features. If a training time was a factor to determin a mdel selection, I might consider using reduced featture. But, I might rank all features and check which set of features will be optinal: if adding 6th or 7th feature in a training set would increase accuracy but not so much impacting on training time, then I will add these features in my model.</p>
+<p><strong>Answer</strong> : Accuary and F-score become slightly lower with a model with 5 features than a model with all features. If a training time was a factor to determin a mdoel, I might consider using reduced number of feattures. But, I might rank all features and check which set of features will be optinal: if adding the 6th or 7th feature in a training set would increase accuracy but not so much impacting on training time, then I will add these features in my model.</p>
 
 </div>
 </div>
