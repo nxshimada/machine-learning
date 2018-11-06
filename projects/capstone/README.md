@@ -3,9 +3,28 @@
 ## Project: Capstone Proposal and Capstone Project
 
 **Note**
+**software used**
+All code is documneted in Jupyter Notebook wiht Python3
+ 
+**List of Python Libralies used for this project**
+ * numpy
+ * pandas
+ * datetime.datatime  
+ * calendar
+ * matplotlib.pyplot 
+ * seaborn 
+ * scipy.stats
+ * sklearn.datasets
+ * sklearn.linear_model
+ * sklearn.model_selection.train_test_split
+ * sklearn.tree.DecisionTreeRegressor
+ * sklearn.ensemble.AdaBoostRegressor
+ * matplotlib.patches 
+ 
+**data used for this project**
+train.csv from Bike Shaaring Demand Project at Kaggle(https://www.kaggle.com/c/bike-sharing-demand/data)
+ 
+_________________________________________________________________________________________________________________
 
-The Capstone is a two-staged project. The first is the proposal component, where you can receive valuable feedback about your project idea, design, and proposed solution. This must be completed prior to your implementation and submitting for the capstone project. 
-
-You can find the [capstone proposal rubric here](https://review.udacity.com/#!/rubrics/410/view), and the [capstone project rubric here](https://review.udacity.com/#!/rubrics/108/view). Please ensure that you are following directions correctly before submitting these two stages which encapsulate your capstone.
 
 Please email [machine-support@udacity.com](mailto:machine-support@udacity.com) if you have any questions.
